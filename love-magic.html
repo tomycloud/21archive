@@ -4,21 +4,19 @@
   <meta charset="utf-8">
   <title>Redirecting…</title>
   <meta name="referrer" content="no-referrer">
-  <!-- 몇 초 뒤 이동 (원하면 2 → 0~5 등으로 바꿔도 OK) -->
   <meta http-equiv="refresh" content="2; url=https://youtu.be/RiMO7zDaKuY?si=w47OPDLn5dSFbizq">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root{
-      /* 🎨 손대기 쉬운 커스텀 변수들 */
-      --bg: #ffffff;           /* 바탕색 */
-      --pink1: #ffe3ee;        /* 파스텔 핑크 가장 밝은 톤 */
-      --pink2: #ffc8dc;        /* 중간 톤 */
-      --pink3: #ff8fbc;        /* 진한 포인트 */
-      --text: #7a3355;         /* 글자색 */
-      --box-alpha: .65;        /* 메시지 박스 투명도 (0~1) */
-      --heart-scale: 0.70;     /* 하트 크기 비율 (0.3~1.0) */
-      --heart-blur: 18px;      /* 하트 가장자리 부드러움 */
-      --delay-sec: 2s;         /* (연출용) 메시지 페이드인 시간 */
+      --bg: #ffffff;
+      --pink1: #ffe3ee;
+      --pink2: #ffc8dc;
+      --pink3: #ff8fbc;
+      --text: #7a3355;
+      --box-alpha: .65;
+      --heart-scale: 0.70;
+      --heart-blur: 18px;
+      --delay-sec: 2s;
     }
     * { box-sizing: border-box; }
     html, body {
@@ -36,7 +34,6 @@
       place-items: center;
       overflow: hidden;
     }
-    /* 메시지 박스 */
     .msg {
       position: relative;
       z-index: 2;
@@ -50,51 +47,33 @@
       animation: fadeIn var(--delay-sec) ease forwards;
     }
     @keyframes fadeIn { to { opacity: 1; } }
-
-    /* 하트 라디얼 그라데이션: 전체를 덮는 SVG를 배경처럼 깔아줌 */
     .bg-svg {
       position: absolute;
       inset: 0;
       z-index: 1;
-      filter: blur(var(--heart-blur)); /* 가장자리 부드럽게 */
+      filter: blur(var(--heart-blur));
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- 하트 그라데이션 배경 (SVG) -->
     <svg class="bg-svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <!-- 원형에서 퍼져나오는 라디얼 그라데이션 정의 -->
       <defs>
-        <!-- 하트 내부에 채워질 라디얼 그라데이션 (중앙 → 바깥) -->
         <radialGradient id="heartRadial" cx="50%" cy="45%" r="60%">
           <stop offset="0%"   stop-color="var(--pink3)" stop-opacity="1"/>
           <stop offset="40%"  stop-color="var(--pink2)" stop-opacity=".95"/>
           <stop offset="85%"  stop-color="var(--pink1)" stop-opacity=".85"/>
           <stop offset="100%" stop-color="var(--bg)"    stop-opacity="0"/>
         </radialGradient>
-
-        <!-- 하트 모양을 위한 경로 (정중앙 배치 + 스케일 조절 가능) -->
         <symbol id="heart" viewBox="-512 -470 1024 940">
-          <!-- 전형적인 하트 path (대칭) -->
-          <path d="
-            M0,-280
-            C 170,-460 520,-330 520,-70
-            C 520,160 300,280 0,470
-            C -300,280 -520,160 -520,-70
-            C -520,-330 -170,-460 0,-280 Z" />
+          <path d="M0,-280 C 170,-460 520,-330 520,-70 C 520,160 300,280 0,470 C -300,280 -520,160 -520,-70 C -520,-330 -170,-460 0,-280 Z" />
         </symbol>
       </defs>
-
-      <!-- 바탕 채움 -->
       <rect x="0" y="0" width="100%" height="100%" fill="var(--bg)"/>
-      <!-- 하트에 라디얼 그라데이션 채우기 -->
       <g transform="translate(500,520) scale(calc(var(--heart-scale)))">
         <use href="#heart" fill="url(#heartRadial)"/>
       </g>
     </svg>
-
-    <!-- 메시지 -->
     <div class="msg">💖 Love is magic... Now playing! 💖
       <noscript>
         <p style="margin:.6em 0 0;">
